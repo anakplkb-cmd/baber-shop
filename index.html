@@ -320,6 +320,89 @@ main#view{flex:1;overflow:auto;padding:26px 30px;min-width:0}
 .demo-box small{text-align:center;font-size:11px}
 .demo-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .demo-btns .btn{padding:10px;font-size:12px}
+/* ===== RESPONSIF HP (presisi, tanpa geser samping) ===== */
+:host{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+#app{overflow-x:hidden}
+#app img,#app svg{max-width:100%}
+#app input,#app select{max-width:100%}
+main#view{overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
+@media (max-width:899px){
+ #app{font-size:15px}
+ small{font-size:12px}
+ input,select{font-size:16px;padding:12px 14px}
+ .btn{font-size:15px;padding:13px 20px}
+ .btn-sm{font-size:13px;padding:9px 14px}
+ .seg button,.theme-seg button{font-size:13px}
+ .fld span{font-size:13px}
+ .card{padding:16px}
+ .card h3{font-size:16px}
+ .page-head{margin-bottom:14px}
+ .page-head h2{font-size:21px}
+ .greet{margin-bottom:14px}
+ .greet b{font-size:19px}
+ .greet .avatar{width:42px;height:42px;font-size:15px}
+ .promo{padding:20px;min-height:160px;margin-bottom:14px}
+ .promo h3{font-size:30px}
+ .promo small{font-size:13px}
+ .promo .badge{font-size:18px;padding:7px 11px}
+ .promo .badge small{font-size:10px}
+ .quick-grid{gap:8px;margin-bottom:14px}
+ .qk{font-size:12px;padding:12px 2px}
+ .qk .ic-tile{width:48px;height:48px}
+ .stats{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+ .stat{padding:14px}
+ .stat b{font-size:19px}
+ .stat small{font-size:12px}
+ .bars{height:160px;gap:6px}
+ .bar i{font-size:10px}
+ .item{padding:12px 2px}
+ .item b,.list-item b{font-size:15px}
+ .item small,.list-item small{font-size:12px}
+ .price{font-size:15px}
+ .list-item{padding:12px}
+ .thumb{width:46px;height:46px}
+ .filter{gap:10px}
+ .filter .fld{flex:1 1 100%;min-width:0}
+ .sum{font-size:14px}
+ .sum .grand{font-size:17px}
+ .kembali{font-size:14px}
+ .grid-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+ .tile{padding:12px;border-radius:22px;min-width:0}
+ .tile-art{height:84px}
+ .tile b{font-size:14px}
+ .tile small{font-size:12px}
+ .price-s{font-size:14px}
+ .add{width:32px;height:32px}
+ .search input{font-size:16px}
+ .menu-grid{gap:10px}
+ .menu-tile{font-size:12px;padding:14px 4px;min-width:0}
+ .menu-tile .ic-tile{width:48px;height:48px}
+ .qa-item{padding:12px}
+ .qa-item b{font-size:15px}
+ .sheet{padding:12px 16px calc(20px + env(safe-area-inset-bottom))}
+ .modal{padding:18px;max-width:calc(100% - 0px)}
+ .modal-head h3{font-size:18px}
+ .login-wrap{max-width:100%}
+ .login-card{padding:22px}
+ .brand h1{font-size:20px}
+ .demo-btns .btn{font-size:13px;padding:11px 8px}
+ .topbar{padding:14px 16px 8px}
+ .topbar .who b{font-size:15px;max-width:150px}
+ .topbar .who small{font-size:11px;display:block;max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .topbar .theme-seg button{padding:6px 10px}
+ main#view{padding:12px 16px calc(112px + env(safe-area-inset-bottom))}
+ .bottom{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));height:68px}
+ .bottom button{font-size:11px}
+ .bottom button .ic{width:21px;height:21px}
+ .struk{max-width:100%}
+}
+@media (max-width:359px){
+ .stats{grid-template-columns:1fr}
+ .grid-cards{grid-template-columns:1fr}
+ .quick-grid{grid-template-columns:repeat(2,1fr)}
+ .greet b{font-size:17px}
+ .promo h3{font-size:26px}
+}
 </style>
 <div id="splash">
   <div class="splash-logo" id="splash-logo"><span>C</span></div>
@@ -411,6 +494,12 @@ HOST.dataset.theme = (() => { try { return localStorage.getItem('kb_theme') || '
 
 // Font, manifest PWA, dan aturan cetak ditambahkan ke <head> halaman (widget tidak bisa mengubah <head>)
 (function injectHead() {
+  if (!document.querySelector('meta[name="viewport"]')) {
+    const vp = document.createElement('meta');
+    vp.name = 'viewport';
+    vp.content = 'width=device-width,initial-scale=1,viewport-fit=cover';
+    document.head.appendChild(vp);
+  }
   if (!document.getElementById('kb-font')) {
     const l = document.createElement('link');
     l.id = 'kb-font'; l.rel = 'stylesheet';
